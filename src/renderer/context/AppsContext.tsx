@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import React, { createContext, useState } from 'react';
-
-import { IReact, IElectron, IVscode } from '../components/Icons';
-
+import { createContext, useState } from 'react';
+import { FaSlack ,FaWhatsapp, FaTelegram ,FaDiscord,FaInstagram, FaFacebookMessenger } from 'react-icons/fa';
 import { TAppUpdater } from './types';
 
 type TAppsContextType = {
@@ -12,22 +10,40 @@ type TAppsContextType = {
 
 const localApp = [
   {
-    name: 'React',
-    link: 'https://reactjs.org/',
+    name: 'Telegram',
+    link: 'https://web.telegram.org/',
     status: false,
-    icon: <IReact size="3em" />,
+    icon: <FaTelegram size="3em" />,
   },
   {
-    name: 'VSCode',
-    link: 'https://vscode.dev/',
+    name: 'WhatApp',
+    link: 'https://web.whatsapp.com/',
     status: false,
-    icon: <IVscode size="3em" />,
+    icon: <FaWhatsapp size="3em" />,
   },
   {
-    name: 'Electron',
-    link: 'https://electronjs.org/',
+    name: 'Discord',
+    link: 'https://discord.com/',
     status: false,
-    icon: <IElectron size="3em" />,
+    icon: <FaDiscord size="3em" />,
+  },
+  {
+    name: 'Instagram',
+    link: 'https://www.instagram.com/direct/inbox/',
+    status: false,
+    icon: <FaInstagram size="3em" />,
+  },
+  {
+    name: 'Facebook',
+    link: 'https://www.messenger.com/',
+    status: false,
+    icon: <FaFacebookMessenger size="3em" />,
+  },
+  {
+    name: 'Slack',
+    link: 'https://slack.com/intl/pt-br',
+    status: false,
+    icon: <FaSlack size="3em" />,
   },
 ];
 
