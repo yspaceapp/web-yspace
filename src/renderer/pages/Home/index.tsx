@@ -1,13 +1,17 @@
 import SideMenu from '../../components/SideMenu';
 import Window from '../../components/Window';
+import Tabs from '../../components/Tabs';
 
-import { Container } from './style';
+import { Container, WindowContainer } from './style';
 
 export default function Home() {
   return (
     <Container>
       <SideMenu />
-      <Window />
+      <WindowContainer>
+        <Tabs />
+        <Window />
+      </WindowContainer>
     </Container>
   );
 }
