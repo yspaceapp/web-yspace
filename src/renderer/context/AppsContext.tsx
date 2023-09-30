@@ -1,33 +1,87 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import React, { createContext, useState } from 'react';
-
-import { IReact, IElectron, IVscode } from '../components/Icons';
-
-import { TAppUpdater } from './types';
+import { createContext, useState } from 'react';
+import {
+  FaSlack,
+  FaWhatsapp,
+  FaTelegram,
+  FaDiscord,
+  FaInstagram,
+  FaFacebookMessenger,
+} from 'react-icons/fa';
+import { TAppUpdater, TCategorys } from './types';
 
 type TAppsContextType = {
   apps: TAppUpdater[];
   handleChangeStatus: (app: TAppUpdater) => void;
+  categorys: TCategorys[];
+  handleFilterCategories: (categoryId: number) => void;
 };
 
 const localApp = [
   {
-    name: 'React',
-    link: 'https://reactjs.org/',
+    name: 'Telegram',
+    link: 'https://web.telegram.org/',
     status: false,
-    icon: <IReact size="3em" />,
+    icon: <FaTelegram size="3em" />,
+    categoryId: 1,
   },
   {
-    name: 'VSCode',
-    link: 'https://vscode.dev/',
+    name: 'WhatApp',
+    link: 'https://web.whatsapp.com/',
     status: false,
-    icon: <IVscode size="3em" />,
+    icon: <FaWhatsapp size="3em" />,
+    categoryId: 1,
   },
   {
-    name: 'Electron',
-    link: 'https://electronjs.org/',
+    name: 'Discord',
+    link: 'https://discord.com/',
     status: false,
-    icon: <IElectron size="3em" />,
+    icon: <FaDiscord size="3em" />,
+    categoryId: 2,
+  },
+  {
+    name: 'Instagram',
+    link: 'https://www.instagram.com/direct/inbox/',
+    status: false,
+    icon: <FaInstagram size="3em" />,
+    categoryId: 2,
+  },
+  {
+    name: 'Facebook',
+    link: 'https://www.messenger.com/',
+    status: false,
+    icon: <FaFacebookMessenger size="3em" />,
+    categoryId: 3,
+  },
+  {
+    name: 'Slack',
+    link: 'https://slack.com/intl/pt-br',
+    status: false,
+    icon: <FaSlack size="3em" />,
+    categoryId: 3,
+  },
+];
+
+const categorys = [
+  {
+    id: 0,
+    name: 'General',
+    slug: 'general',
+  },
+  {
+    id: 1,
+    name: 'Social',
+    slug: 'social',
+  },
+  {
+    id: 2,
+    name: 'Business',
+    slug: 'business',
+  },
+  {
+    id: 3,
+    name: 'Entertainment',
+    slug: 'entertainment',
   },
 ];
 
@@ -46,8 +100,18 @@ export function AppsContextProvider({ children }: any) {
     );
   };
 
+  const handleFilterCategories = (categoryId: number) => {
+    if (categoryId === 0) {
+      setApps(localApp);
+      return;
+    }
+    setApps(localApp.filter((app) => app.categoryId === categoryId));
+  };
+
   return (
-    <AppsContext.Provider value={{ apps, handleChangeStatus }}>
+    <AppsContext.Provider
+      value={{ apps, handleChangeStatus, categorys, handleFilterCategories }}
+    >
       {children}
     </AppsContext.Provider>
   );

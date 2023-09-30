@@ -5,4 +5,10 @@ export type TAppUpdater = {
   link: string;
   status: boolean;
   icon: ReactNode;
+  categoryId: number;
+};
+export type TCategorys = {
+  id: number;
+  name: string;
+  slug: string;
 };
