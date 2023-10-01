@@ -1,22 +1,26 @@
-import { useContext } from 'react';
-import { AppsContext } from '../../context/AppsContext';
+import scrape from 'website-scraper';
+import PuppeteerPlugin from 'website-scraper-puppeteer';
+import path from 'path';
 
-import { Container, MessageEmpty } from './style';
+export function getSites() {
+  scrape({
+    // Forneça a URL do site que você quer copiar
+    urls: ['https://web.telegram.org/'],
 
-export default function Window() {
-  const { apps } = useContext(AppsContext);
+    // Especifique a pasta onde os arquivos do site serão salvos em pasta-do-site
+    directory: path.resolve(__dirname, '../renderer/assets/stites'),
 
-  const showSelectedApp = apps.find((app) => app.status);
-
-  return (
-    <Container>
-      {showSelectedApp?.link ? (
-        <iframe title={showSelectedApp?.name} src={showSelectedApp?.link} />
-      ) : (
-        <MessageEmpty>
-          <h1>Selecione um aplicativo</h1>
-        </MessageEmpty>
-      )}
-    </Container>
-  );
+    // carregue o plugin do Puppeteer
+    plugins: [
+      new PuppeteerPlugin({
+        launchOptions: {
+          headless: true,
+        },
+        scrollToBottom: {
+          timeout: 10000,
+          viewportN: 10,
+        },
+      }),
+    ],
+  });
 }

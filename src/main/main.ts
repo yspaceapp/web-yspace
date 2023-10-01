@@ -12,8 +12,10 @@ import path from 'path';
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+import { getSites } from './getSites';
 
 class AppUpdater {
   constructor() {
@@ -127,6 +129,7 @@ app.on('window-all-closed', () => {
 app
   .whenReady()
   .then(() => {
+    getSites();
     createWindow();
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
