@@ -24,4 +24,3 @@ function twoViews () {
 
 app.whenReady().then(twoViews)
 
-module.exports = { twoViews }
